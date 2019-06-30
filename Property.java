@@ -5,22 +5,80 @@ public class Property extends Buyable{
   private String color;
   private double dBuyPrice;
   private int nHouses; //also used as index for rentTiers
-  private double rentTiers[] = new double[3];
-  private double dRentMultiplier;
+  private double rentTiers[] = new double[6];
+  private double dDevelopCost;
+  private double dCollected;
+  private double dFootMultiplier;
   private int nFootTraffic;
   private int nFootTrafficLimit;
 
-  public Property(String name, String color, double dBuyPrice, double[] rentTiers, double dRentMultiplier, int nFootTrafficLimit){
+
+  public Property(String name, String color, double dBuyPrice, double dDevelopCost, double[] rentTiers, double dFootMultiplier, int nPlayers){
     this.strPropertyName = name;
-    this.Color = color;
-    this.rentTiers = rentTiers;
+    this.color = color;
+    this.dBuyPrice = dBuyPrice;
+    this.dDevelopCost = dDevelopCost;
     this.nHouses = 0;
-    this.dRentMultiplier = dRentMultiplier;
-    nFootTraffic = 0;
-    this.nFootTrafficLimit = nFootTrafficLimit;
+    this.rentTiers = rentTiers;
+    this.dCollected = 0;
+    this.dFootMultiplier = dFootMultiplier;
+    this.nFootTraffic = 0;
   }
-  public getBuyPrice(){
-    return nBuyPrice;
+
+  public String getName(){
+    return strPropertyName;
+  }
+
+  public String getColor(){
+    return color;
+  }
+
+  public double getBuyPrice(){
+    return dBuyPrice;
+  }
+
+  public double getDevelopCost(){
+    return dDevelopCost;
+  }
+
+  public int getHouses(){
+    return nHouses;
+  }
+
+  public void develop(){
+    nHouses += 1;
+  }
+
+  public double getRent(){
+    return rentTiers[nHouses];
+  }
+
+  public void increaseRent(){
+    for (int i = 0; i<5 ; i++){
+      rentTiers[i] += 10;
+    }
+  }
+
+  public int getFootLimit(){
+    return nFootTrafficLimit;
+  }
+
+  public void playerLanded(){
+    nFootTraffic += 1;
+  }
+
+  public double buyProperty(Player buyer){
+    this.owner = buyer;
+    return dBuyPrice;
+  }
+
+  public double collectRent(){
+    dCollected = rentTiers[nHouses];
+    return rentTiers[nHouses];
+  }
+
+  public void debugPrint(){ //FOR DEBUGGING PURPOSES ONLY
+    System.out.println("" + this.strPropertyName + " " + this.color + " " + this.dBuyPrice + " " + this.dDevelopCost  + " " + this.rentTiers[nHouses] + " " +  this.dFootMultiplier);
   }
 
 }
