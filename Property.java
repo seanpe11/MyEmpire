@@ -11,6 +11,7 @@ public class Property extends Buyable{
   private double dFootMultiplier;
   private int nFootTraffic;
   private int nFootTrafficLimit;
+  private boolean doubled;
 
 
   public Property(String name, String color, double dBuyPrice, double dDevelopCost, double[] rentTiers, double dFootMultiplier, int nPlayers){
@@ -57,7 +58,10 @@ public class Property extends Buyable{
     No params needed (will mostly use constructors in subclasses)
   */
 
-  public double getRent(){
+public double getRent(){
+    if (doubled){
+      return rentTiers[nHouses] * 2;
+    }
     return rentTiers[nHouses];
   }
 
@@ -101,10 +105,16 @@ public class Property extends Buyable{
     No params needed (will mostly use constructors in subclasses)
   */
 
-  public double collectRent(){
-    dCollected = rentTiers[nHouses];
+public double collectRent(){
+    if (doubled){
+      doubled = false;
+      dCollected += rentTiers[nHouses] * 2;
+      return rentTiers[nHouses] * 2;
+    }
+    dCollected += rentTiers[nHouses];
     return rentTiers[nHouses];
   }
+
    /**
     Collects rent base from the property and the level
       player1 steps on Madison unimporved owned by player 2 pays 14
@@ -125,5 +135,19 @@ public class Property extends Buyable{
     No params needed (will mostly use constructors in subclasses)
   */
 
+
+
+
+
+
+public void doubleRent(){
+    doubled = true;
+  }
+   /**
+    checks if the rent is doubled or not
+  */
+
 }
+
+
 
