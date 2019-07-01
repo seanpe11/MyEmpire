@@ -1,7 +1,7 @@
 public class Buyable{
   /**
   Owner of the tile
-  @author Sean Pe 11828900 and Chuan-Chen
+  @author Sean Pe 11828900 and Chuan-Chen 11838957
   @author sean_pe@dlsu.edu.ph
 
   */
